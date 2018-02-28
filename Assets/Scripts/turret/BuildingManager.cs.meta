@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 08f72ae46db8b854bb28bb5f8cb8ac99
+timeCreated: 1519815792
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - standarTurretPrefab: {fileID: 1260192268838878, guid: d4c6b4eb87f0e9845a5584e13bd829c5,
+      type: 2}
+  - pannelTurretPrefab: {fileID: 1654107699684858, guid: de7c1b07a1fa3f248863ad7c2789095f,
+      type: 2}
+  - missilTurretPrefab: {fileID: 1061953757188906, guid: ab0c143b8b80dc547b8d36d3c482c08f,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
