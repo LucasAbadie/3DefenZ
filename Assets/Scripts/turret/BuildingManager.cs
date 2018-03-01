@@ -9,9 +9,9 @@ public class BuildingManager : MonoBehaviour {
 	*/
 	[HideInInspector] public static BuildingManager instance = null;
 
-	public GameObject standarTurretPrefab;
-	public GameObject pannelTurretPrefab;
-	public GameObject missilTurretPrefab;
+	public TurretBlueprint standarTurret;
+	public TurretBlueprint pannelTurret;
+	public TurretBlueprint missileTurret;
 
 	private GameObject turretToBuild;
 
@@ -31,7 +31,6 @@ public class BuildingManager : MonoBehaviour {
 	/**
 	* Monobehavior methods
 	*/
-	// Use this for initialization
 	void Awake()
 	{
 

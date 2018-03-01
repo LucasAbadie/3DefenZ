@@ -5,25 +5,43 @@ using UnityEngine;
 public class Shop : MonoBehaviour {
 
 	BuildingManager buildManager;
+	LevelManager levelManager;
 
 	private void Start()
 	{
 		buildManager = BuildingManager.instance;
+		levelManager = LevelManager.instance;
 	}
 
 
 	public void PurchaseStandarTurret()
 	{
-		buildManager.TurretToBuild = buildManager.standarTurretPrefab;
+		buildManager.TurretToBuild = buildManager.standarTurret.prefab;
+		Purchase(buildManager.standarTurret);
 	}
 
 	public void PurchasePannelTurret()
 	{
-		buildManager.TurretToBuild = buildManager.pannelTurretPrefab;
+		buildManager.TurretToBuild = buildManager.pannelTurret.prefab;
+		Purchase(buildManager.pannelTurret);
 	}
 
-	public void PurchaseMissilTurret()
+	public void PurchaseMissileTurret()
 	{
-		buildManager.TurretToBuild = buildManager.missilTurretPrefab;
+		buildManager.TurretToBuild = buildManager.missileTurret.prefab;
+		Purchase(buildManager.missileTurret);
+	}
+
+	private void Purchase(TurretBlueprint turret)
+	{
+		if (levelManager.Currency > turret.cost)
+		{
+			levelManager.Currency -= turret.cost;
+			//Debug.Log("(Descrease) New currency : " + LevelManager.instance.Currency);
+		}
+		else
+		{
+			GameManager.instance.logsManager.Log_info("Shop", "Purchase", turret.prefab.gameObject.name + " cost is upper than currency");
+		}
 	}
 }

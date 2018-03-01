@@ -6,3 +6,12 @@
 2/7/2018 7:28:33 PM | WARN  | Node (148) Node class-->OnMouseDown() | Message : "turret in this node is not null".
 2/7/2018 7:28:33 PM | WARN  | Node (148) Node class-->OnMouseDown() | Message : "turret in this node is not null".
 2/7/2018 7:28:34 PM | WARN  | Node (148) Node class-->OnMouseDown() | Message : "turret in this node is not null".
+2/28/2018 2:46:44 PM | INFO  | Shop-->Purchase() | Message : "Turretcost is upper than currency".
+2/28/2018 2:46:50 PM | INFO  | Shop-->Purchase() | Message : "Turret with panelscost is upper than currency".
+2/28/2018 2:48:22 PM | INFO  | Shop-->Purchase() | Message : "Turret with panels cost is upper than currency".
+2/28/2018 2:48:28 PM | INFO  | Shop-->Purchase() | Message : "Turret cost is upper than currency".
+2/28/2018 2:48:30 PM | INFO  | Shop-->Purchase() | Message : "Missile Launcher cost is upper than currency".
+2/28/2018 2:57:28 PM | INFO  | Shop-->Purchase() | Message : "Turret cost is upper than currency".
+2/28/2018 2:57:30 PM | INFO  | Shop-->Purchase() | Message : "Missile Launcher cost is upper than currency".
+2/28/2018 2:57:32 PM | INFO  | Shop-->Purchase() | Message : "Turret with panels cost is upper than currency".
+2/28/2018 2:57:32 PM | INFO  | Shop-->Purchase() | Message : "Turret cost is upper than currency".

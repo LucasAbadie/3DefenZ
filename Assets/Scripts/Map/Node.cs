@@ -24,6 +24,9 @@ public class Node : MonoBehaviour {
 
 	private void OnMouseDown()
 	{
+		if (EventSystem.current.IsPointerOverGameObject())
+			return;
+
 		if(turret != null)
 		{
 			GameManager.instance.logsManager.Log_warn(gameObject.name + " Node class", "OnMouseDown", "turret in this node is not null");
@@ -36,7 +39,10 @@ public class Node : MonoBehaviour {
 
 	private void OnMouseEnter()
 	{
-		if(!EventSystem.current.IsPointerOverGameObject())
+		if (EventSystem.current.IsPointerOverGameObject())
+			return;
+
+		if (!EventSystem.current.IsPointerOverGameObject())
 			rend.material.color = hoverColor;
 	}
 

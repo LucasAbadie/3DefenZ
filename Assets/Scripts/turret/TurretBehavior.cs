@@ -11,7 +11,7 @@ public class TurretBehavior : MonoBehaviour {
 	private Transform firePoint;
 
 	[Header("Attributes")]
-	[SerializeField, Range(0, 20)] private float range = 15f;
+	[SerializeField, Range(5, 40)] private float range = 15f;
 	[SerializeField, Range(0, 20)] private float rotSpeed = 10f;
 	[Space(15)]
 	[SerializeField] private float fireRate = 1f;
@@ -30,11 +30,13 @@ public class TurretBehavior : MonoBehaviour {
 		if (target == null)
 			return;
 
+		// Rotation turret
 		Vector3 dir = target.position - transform.position;
 		Quaternion lookRotation = Quaternion.LookRotation(dir);
 		Vector3 rotation = Quaternion.Lerp(pivot.rotation, lookRotation, Time.deltaTime * rotSpeed).eulerAngles;
 		pivot.rotation = Quaternion.Euler(0f, rotation.y, 0f);
 
+		// Shoot
 		if(fireCD <= 0f)
 		{
 			Shoot();
@@ -85,7 +87,7 @@ public class TurretBehavior : MonoBehaviour {
 
 		if (bullet != null)
 		{
-			bullet.Seek(target);
+			bullet.Seek(target.gameObject);
 		}
 	}
 }
