@@ -6802,6 +6802,11 @@ Prefab:
       propertyPath: m_SizeDelta.x
       value: -1397.5999
       objectReference: {fileID: 0}
+    - target: {fileID: 114388079994896858, guid: ba6383e94c167e042bc4ebf3403fda59,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PurchasePanelTurret
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ba6383e94c167e042bc4ebf3403fda59, type: 2}
   m_IsPrefabParent: 0
@@ -16289,15 +16294,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4070445159695276, guid: 3104957db207a59419698c99c7459fa3, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 19.152914
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4070445159695276, guid: 3104957db207a59419698c99c7459fa3, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.3500257
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4070445159695276, guid: 3104957db207a59419698c99c7459fa3, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4070445159695276, guid: 3104957db207a59419698c99c7459fa3, type: 2}
       propertyPath: m_LocalRotation.x

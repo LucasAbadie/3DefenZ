@@ -10,7 +10,7 @@ public class BuildingManager : MonoBehaviour {
 	[HideInInspector] public static BuildingManager instance = null;
 
 	public TurretBlueprint standarTurret;
-	public TurretBlueprint pannelTurret;
+	public TurretBlueprint panelTurret;
 	public TurretBlueprint missileTurret;
 
 	private GameObject turretToBuild;

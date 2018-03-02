@@ -35,7 +35,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1244731295055254}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 19.152914, y: 1.3500257, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -56,7 +56,7 @@ MonoBehaviour:
     prefab: {fileID: 1260192268838878, guid: d4c6b4eb87f0e9845a5584e13bd829c5, type: 2}
     cost: 100
     fireDamage: 0
-  pannelTurret:
+  panelTurret:
     prefab: {fileID: 1654107699684858, guid: de7c1b07a1fa3f248863ad7c2789095f, type: 2}
     cost: 250
     fireDamage: 0

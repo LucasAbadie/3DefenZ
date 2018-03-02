@@ -14,8 +14,8 @@ public class TurretBehavior : MonoBehaviour {
 	[SerializeField, Range(5, 40)] private float range = 15f;
 	[SerializeField, Range(0, 20)] private float rotSpeed = 10f;
 	[Space(15)]
-	[SerializeField] private float fireRate = 1f;
-	[SerializeField, Range(0, 5)] private float fireCD = 0f;
+	[SerializeField, Range(0, 5)] private float fireRate = 1f;
+	private float fireCD = 0f;
 
 	// Use this for initialization
 	void Start () {
@@ -27,6 +27,8 @@ public class TurretBehavior : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		fireCD -= Time.deltaTime;
+
 		if (target == null)
 			return;
 
@@ -42,8 +44,6 @@ public class TurretBehavior : MonoBehaviour {
 			Shoot();
 			fireCD = 1 / fireRate;
 		}
-
-		fireCD -= Time.deltaTime;
 	}
 
 	private void OnDrawGizmosSelected()
