@@ -10,12 +10,17 @@ public class TurretBehavior : MonoBehaviour {
 	[SerializeField] private Transform bulletPrefab;
 	private Transform firePoint;
 
+	[SerializeField] private bool isUseLaser;
+	private LineRenderer lineRenderer;
+	private ParticleSystem impactEffect;
+	private Light impactLight;
+
 	[Header("Attributes")]
 	[SerializeField, Range(5, 40)] private float range = 15f;
 	[SerializeField, Range(0, 20)] private float rotSpeed = 10f;
 	[Space(15)]
-	[SerializeField] private float fireRate = 1f;
-	[SerializeField, Range(0, 5)] private float fireCD = 0f;
+	[SerializeField, Range(0, 5)] private float fireRate = 1f;
+	private float fireCD = 0f;
 
 	// Use this for initialization
 	void Start () {
@@ -23,33 +28,66 @@ public class TurretBehavior : MonoBehaviour {
 
 		pivot = transform.GetChild(0);
 		firePoint = transform.GetChild(0).GetChild(0);
+
+		if (isUseLaser)
+		{
+			lineRenderer = transform.GetComponent<LineRenderer>();
+			impactEffect = transform.GetChild(transform.childCount - 1).GetComponent<ParticleSystem>();
+			impactLight = impactEffect.transform.GetChild(0).GetChild(0).GetComponent<Light>();
+		}
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (target == null)
-			return;
-
-		// Rotation turret
-		Vector3 dir = target.position - transform.position;
-		Quaternion lookRotation = Quaternion.LookRotation(dir);
-		Vector3 rotation = Quaternion.Lerp(pivot.rotation, lookRotation, Time.deltaTime * rotSpeed).eulerAngles;
-		pivot.rotation = Quaternion.Euler(0f, rotation.y, 0f);
-
-		// Shoot
-		if(fireCD <= 0f)
 		{
-			Shoot();
-			fireCD = 1 / fireRate;
+			if (isUseLaser)
+			{
+				if (lineRenderer.enabled)
+				{
+					lineRenderer.enabled = false;
+					impactEffect.Stop();
+					impactLight.enabled = false;
+				}
+					
+			}
+
+			return;
 		}
 
-		fireCD -= Time.deltaTime;
+		// Rotation turret
+		LockOnTarget();
+
+		// Shoot
+		if (isUseLaser)
+		{
+			Laser();
+		}
+		else
+		{
+			if (fireCD <= 0f)
+			{
+				Shoot();
+				fireCD = 1 / fireRate;
+			}
+
+			fireCD -= Time.deltaTime;
+		}		
 	}
 
 	private void OnDrawGizmosSelected()
 	{
 		Gizmos.color = Color.red;
 		Gizmos.DrawWireSphere(transform.position, range);
+	}
+
+	void LockOnTarget()
+	{
+		Vector3 dir = target.position - transform.position;
+		Quaternion lookRotation = Quaternion.LookRotation(dir);
+		Vector3 rotation = Quaternion.Lerp(pivot.rotation, lookRotation, Time.deltaTime * rotSpeed).eulerAngles;
+
+		pivot.rotation = Quaternion.Euler(0f, rotation.y, 0f);
 	}
 
 	void UpdateTarget()
@@ -89,5 +127,23 @@ public class TurretBehavior : MonoBehaviour {
 		{
 			bullet.Seek(target.gameObject);
 		}
+	}
+
+	void Laser()
+	{
+		if (!lineRenderer.enabled)
+		{
+			lineRenderer.enabled = true;
+			impactEffect.Play();
+			impactLight.enabled = true;
+		}
+
+		lineRenderer.SetPosition(0, firePoint.position);
+		lineRenderer.SetPosition(1, target.position);
+
+		// Set pos & rot impacte effect particle
+		Vector3 dir = firePoint.position - target.position;
+		impactEffect.transform.position = target.position + dir.normalized;
+		impactEffect.transform.rotation = Quaternion.LookRotation(dir);
 	}
 }

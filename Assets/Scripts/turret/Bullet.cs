@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour {
 
 	private Enemy target;
 	[SerializeField] private float speed = 70f;
+	[SerializeField, Range(0, 50)] private float explosionRadius = 0f;
 	[SerializeField] private GameObject impactEffect;
 
 	public void Seek(GameObject _target)
@@ -27,11 +28,11 @@ public class Bullet : MonoBehaviour {
 		if (dir.magnitude <= distanceThisFrame)
 		{
 			HitTarget();
-			target.Kill();
 			return;
 		}
 
 		transform.Translate(dir.normalized * distanceThisFrame, Space.World);
+		transform.LookAt(target.transform);
 	}
 
 	void HitTarget()
@@ -39,6 +40,38 @@ public class Bullet : MonoBehaviour {
 		GameObject effectInst = Instantiate(impactEffect, transform.position, transform.rotation).gameObject;
 		Destroy(effectInst, 2f);
 
+		if(explosionRadius > 0f)
+		{
+			Explode();
+		}
+		else
+		{
+			Damage(target.transform);
+		}
+
 		Destroy(this.gameObject);
+	}
+
+	private void Explode()
+	{
+		Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
+		foreach(Collider coll in colliders)
+		{
+			if(coll.tag == GameManager.instance.EnemyTag)
+			{
+				Damage(coll.transform);
+			}
+		}
+	}
+
+	private void Damage(Transform targetEnemy)
+	{
+		targetEnemy.GetComponent<Enemy>().Kill();
+	}
+
+	private void OnDrawGizmosSelected()
+	{
+		Gizmos.color = Color.green;
+		Gizmos.DrawWireSphere(transform.position, explosionRadius);
 	}
 }

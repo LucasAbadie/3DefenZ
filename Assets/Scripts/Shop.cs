@@ -7,6 +7,11 @@ public class Shop : MonoBehaviour {
 	BuildingManager buildManager;
 	LevelManager levelManager;
 
+	public TurretBlueprint standarTurret;
+	public TurretBlueprint panelTurret;
+	public TurretBlueprint missileTurret;
+	public TurretBlueprint laserBeamer;
+
 	private void Start()
 	{
 		buildManager = BuildingManager.instance;
@@ -16,25 +21,31 @@ public class Shop : MonoBehaviour {
 
 	public void PurchaseStandarTurret()
 	{
-		buildManager.TurretToBuild = buildManager.standarTurret.prefab;
-		Purchase(buildManager.standarTurret);
+		buildManager.TurretToBuild = standarTurret.prefab;
+		Purchase(standarTurret);
 	}
 
-	public void PurchasePannelTurret()
+	public void PurchasePanelTurret()
 	{
-		buildManager.TurretToBuild = buildManager.pannelTurret.prefab;
-		Purchase(buildManager.pannelTurret);
+		buildManager.TurretToBuild = panelTurret.prefab;
+		Purchase(panelTurret);
 	}
 
 	public void PurchaseMissileTurret()
 	{
-		buildManager.TurretToBuild = buildManager.missileTurret.prefab;
-		Purchase(buildManager.missileTurret);
+		buildManager.TurretToBuild = missileTurret.prefab;
+		Purchase(missileTurret);
+	}
+
+	public void PurchaseLaserBeamer()
+	{
+		buildManager.TurretToBuild = laserBeamer.prefab;
+		Purchase(laserBeamer);
 	}
 
 	private void Purchase(TurretBlueprint turret)
 	{
-		if (levelManager.Currency > turret.cost)
+		if (levelManager.Currency >= turret.cost)
 		{
 			levelManager.Currency -= turret.cost;
 			//Debug.Log("(Descrease) New currency : " + LevelManager.instance.Currency);

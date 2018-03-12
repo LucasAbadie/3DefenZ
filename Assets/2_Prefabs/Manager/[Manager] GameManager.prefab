@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4070445159695276}
   - component: {fileID: 114134056687046132}
   - component: {fileID: 114130770424955822}
+  - component: {fileID: 114209381509070782}
   m_Layer: 0
   m_Name: '[Manager] GameManager'
   m_TagString: Untagged
@@ -35,7 +36,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1244731295055254}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 19.152914, y: 1.3500257, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -52,18 +53,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08f72ae46db8b854bb28bb5f8cb8ac99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  standarTurret:
-    prefab: {fileID: 1260192268838878, guid: d4c6b4eb87f0e9845a5584e13bd829c5, type: 2}
-    cost: 100
-    fireDamage: 0
-  pannelTurret:
-    prefab: {fileID: 1654107699684858, guid: de7c1b07a1fa3f248863ad7c2789095f, type: 2}
-    cost: 250
-    fireDamage: 0
-  missileTurret:
-    prefab: {fileID: 1061953757188906, guid: ab0c143b8b80dc547b8d36d3c482c08f, type: 2}
-    cost: 400
-    fireDamage: 0
 --- !u!114 &114134056687046132
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -77,3 +66,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSource: {fileID: 0}
   enemyTag: Enemy
+--- !u!114 &114209381509070782
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1244731295055254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4318ec9cb86696b4693581ae6e4cb91a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  standarTurret:
+    prefab: {fileID: 1260192268838878, guid: d4c6b4eb87f0e9845a5584e13bd829c5, type: 2}
+    cost: 0
+    fireDamage: 0
+  panelTurret:
+    prefab: {fileID: 1654107699684858, guid: de7c1b07a1fa3f248863ad7c2789095f, type: 2}
+    cost: 0
+    fireDamage: 0
+  missileTurret:
+    prefab: {fileID: 1061953757188906, guid: ab0c143b8b80dc547b8d36d3c482c08f, type: 2}
+    cost: 0
+    fireDamage: 0
+  laserBeamer:
+    prefab: {fileID: 1728715491848886, guid: 20d90b1b0bdf2704b815421d65fe74eb, type: 2}
+    cost: 0
+    fireDamage: 0
