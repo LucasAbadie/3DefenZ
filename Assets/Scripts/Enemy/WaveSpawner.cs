@@ -46,6 +46,7 @@ public class WaveSpawner : MonoBehaviour {
 
 	void SpawnEnemy()
 	{
-		Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
+		Quaternion rot = Quaternion.Euler(spawnPoint.rotation.x, 0f, spawnPoint.rotation.z);
+		Instantiate(enemyPrefab, spawnPoint.position, rot);
 	}
 }

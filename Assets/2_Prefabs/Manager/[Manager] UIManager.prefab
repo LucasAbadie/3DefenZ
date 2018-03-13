@@ -51,4 +51,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60d074c07c14f374e9c2d33755777a1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreText: {fileID: 0}
+  textLives: {fileID: 0}
+  panelInfo: {fileID: 0}

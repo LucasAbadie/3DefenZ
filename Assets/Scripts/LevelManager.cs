@@ -8,27 +8,27 @@ public class LevelManager : MonoBehaviour {
 	[HideInInspector] public static LevelManager instance = null;
 
 	[Header("Attributes")]
-	[HideInInspector] private int currency = 0;
 	[SerializeField] private int startCurrency = 0;
+	[SerializeField] private int startLives = 0;
 
+	[HideInInspector] public int stateGame;
+	public enum StateGame { Win, Lose, Pause, InGame };
 
 	/**
 	* Accessors
 	*/
-	public int Currency
+	public int StartCurrency
 	{
 		get
 		{
-			return currency;
+			return startCurrency;
 		}
-
-		set
+	}
+	public int StartLives
+	{
+		get
 		{
-			Debug.Log(currency);
-			if (currency > 0)
-				currency = value;
-			else
-				currency = 0;
+			return startLives;
 		}
 	}
 
@@ -50,6 +50,6 @@ public class LevelManager : MonoBehaviour {
 
 	private void Start()
 	{
-		currency = startCurrency;
+		stateGame = (int)StateGame.InGame;
 	}
 }

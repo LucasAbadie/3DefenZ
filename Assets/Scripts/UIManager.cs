@@ -6,7 +6,11 @@ public class UIManager : MonoBehaviour {
 	/**
 	* Attributes
 	*/
-	[SerializeField] private Text scoreText;
+	private LevelManager levelManager;
+	private PlayerStats playerStats;
+
+	[SerializeField] private Text textLives;
+	[SerializeField] private Text textCurrency;
 	[SerializeField] private GameObject panelInfo;
 
 	/**
@@ -15,10 +19,14 @@ public class UIManager : MonoBehaviour {
 	private void Start()
 	{
 		panelInfo.SetActive(false);
+
+		playerStats = PlayerStats.instance;
+		levelManager = LevelManager.instance;
 	}
 
 	void Update () {
-		scoreText.text = "Waves " + WaveSpawner.WaveIndex.ToString();
+		textLives.text = playerStats.Lives + " LIVES";
+		textCurrency.text = playerStats.Currency + " $";
 	}
 
 	/**

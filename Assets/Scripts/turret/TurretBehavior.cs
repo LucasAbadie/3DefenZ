@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class TurretBehavior : MonoBehaviour {
 
+	/**
+	* Attributes
+	*/
 	[Header("Unity Setup fields")]
 	[SerializeField] private Transform target;
 	private Transform pivot;
 	[SerializeField] private Transform bulletPrefab;
 	private Transform firePoint;
 
-	[SerializeField] private bool isUseLaser;
+	private bool isUseLaser;
 	private LineRenderer lineRenderer;
 	private ParticleSystem impactEffect;
 	private Light impactLight;
@@ -20,8 +23,24 @@ public class TurretBehavior : MonoBehaviour {
 	[SerializeField, Range(0, 20)] private float rotSpeed = 10f;
 	[Space(15)]
 	[SerializeField, Range(0, 5)] private float fireRate = 1f;
+	[SerializeField] private float fireDamage = 1f;
 	private float fireCD = 0f;
 
+	/**
+	* Accessors
+	*/
+	public float FireDamage
+	{
+		get
+		{
+			return fireDamage;
+		}
+	}
+
+
+	/**
+	* Monobehavior methods
+	*/
 	// Use this for initialization
 	void Start () {
 		InvokeRepeating("UpdateTarget", 0, 0.5f);
@@ -29,8 +48,10 @@ public class TurretBehavior : MonoBehaviour {
 		pivot = transform.GetChild(0);
 		firePoint = transform.GetChild(0).GetChild(0);
 
-		if (isUseLaser)
+		if (bulletPrefab == null)
 		{
+			isUseLaser = true;
+
 			lineRenderer = transform.GetComponent<LineRenderer>();
 			impactEffect = transform.GetChild(transform.childCount - 1).GetComponent<ParticleSystem>();
 			impactLight = impactEffect.transform.GetChild(0).GetChild(0).GetComponent<Light>();
@@ -81,6 +102,10 @@ public class TurretBehavior : MonoBehaviour {
 		Gizmos.DrawWireSphere(transform.position, range);
 	}
 
+
+	/**
+	* Personal methods
+	*/
 	void LockOnTarget()
 	{
 		Vector3 dir = target.position - transform.position;
@@ -120,7 +145,7 @@ public class TurretBehavior : MonoBehaviour {
 
 	void Shoot()
 	{
-		GameObject bulletDir = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation).gameObject;
+		GameObject bulletDir = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation, transform).gameObject;
 		Bullet bullet = bulletDir.GetComponent<Bullet>();
 
 		if (bullet != null)
