@@ -40,14 +40,14 @@ public class PlayerStats : MonoBehaviour {
 
 		set
 		{
-			if(value <= 0 && levelManager.stateGame != (int)LevelManager.StateGame.Lose)
+			lives = value;
+
+			if (value <= 0 && levelManager.stateGame != (int)LevelManager.StateGame.Lose)
 			{
 				levelManager.stateGame = (int)LevelManager.StateGame.Lose;
-				Debug.Log("Game Over !");
+				UIManager.instance.DisplayPanelEndMenu();
 				return;
 			}
-
-			lives = value;
 		}
 	}
 
@@ -65,8 +65,6 @@ public class PlayerStats : MonoBehaviour {
 		}
 
 		instance = this;
-
-		DontDestroyOnLoad(this.gameObject);
 	}
 
 	private void Start()

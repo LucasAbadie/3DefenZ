@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour {
 
@@ -10,6 +11,7 @@ public class LevelManager : MonoBehaviour {
 	[Header("Attributes")]
 	[SerializeField] private int startCurrency = 0;
 	[SerializeField] private int startLives = 0;
+	[HideInInspector] public int rounds = 0;
 
 	[HideInInspector] public int stateGame;
 	public enum StateGame { Win, Lose, Pause, InGame };
@@ -50,6 +52,22 @@ public class LevelManager : MonoBehaviour {
 
 	private void Start()
 	{
+		Time.timeScale = 1;
+
 		stateGame = (int)StateGame.InGame;
+		rounds = 0;
+	}
+
+	/**
+	* Personal methods
+	*/
+	public static void RestartCurrentScene()
+	{
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+	}
+
+	public static void BackToMenu()
+	{
+		SceneManager.LoadScene(0);
 	}
 }

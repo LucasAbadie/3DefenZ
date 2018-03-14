@@ -65,7 +65,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startCurrency: 400
-  startLives: 20
+  startLives: 1
+  rounds: 0
+  stateGame: 0
 --- !u!114 &114929919590202566
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -77,7 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b90ddf3e9a29efc47b5a3fb3607f4a16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 4058219145904226, guid: 58b8ae5431831e84a8ce7df64dde8af8,
+  enemyPrefab: {fileID: 4527921288983262, guid: c475b1397621e6145ae0fe0a8ccd0254,
     type: 2}
   spawnPoint: {fileID: 0}
   timeBetweensWaves: 8

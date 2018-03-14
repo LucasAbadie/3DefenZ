@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour {
 	private float health = 0;
 	private Image healthBar;
 
-	public float speed = 10f;
+	[Range(0, 30)] public float speed = 10f;
 
 	[SerializeField] private int dropCurrency = 0;
 

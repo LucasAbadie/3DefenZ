@@ -199,7 +199,7 @@ MonoBehaviour:
   deathEffect: {fileID: 1429359164080054, guid: a47d42386e9f3f840a934f5c168d099d,
     type: 2}
   healthMax: 100
-  speed: 10
+  speed: 30
   dropCurrency: 50
 --- !u!114 &114292355028441262
 MonoBehaviour:
