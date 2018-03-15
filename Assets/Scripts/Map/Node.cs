@@ -27,6 +27,12 @@ public class Node : MonoBehaviour {
 		if (EventSystem.current.IsPointerOverGameObject())
 			return;
 
+		if(BuildingManager.instance.TurretToBuild == null)
+		{
+			GameManager.instance.logsManager.Log_warn(gameObject.name + " Node class", "OnMouseDown", "turretToBuild into the BuildingManager is null");
+			return;
+		}
+
 		if(turret != null)
 		{
 			GameManager.instance.logsManager.Log_warn(gameObject.name + " Node class", "OnMouseDown", "turret in this node is not null");
@@ -35,6 +41,8 @@ public class Node : MonoBehaviour {
 
 		GameObject turretToBuild = BuildingManager.instance.TurretToBuild;
 		turret = Instantiate(turretToBuild, transform.position + turretPosOffset, transform.rotation);
+
+		BuildingManager.instance.TurretToBuild = null;
 	}
 
 	private void OnMouseEnter()

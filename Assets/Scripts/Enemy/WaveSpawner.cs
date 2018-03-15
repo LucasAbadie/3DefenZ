@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class WaveSpawner : MonoBehaviour {
 
+	private LevelManager levelManager;
+
 	[Header("Unity Setup fields")]
 	public Transform enemyPrefab;
 	public Transform spawnPoint;
@@ -22,6 +24,11 @@ public class WaveSpawner : MonoBehaviour {
 		}
 	}
 
+	private void Start()
+	{
+		levelManager = LevelManager.instance;
+	}
+
 	private void Update()
 	{
 		if(countdown <= 0f)
@@ -35,7 +42,7 @@ public class WaveSpawner : MonoBehaviour {
 
 	IEnumerator SpawnWave()
 	{
-		waveIndex++;
+		levelManager.Rounds = waveIndex++;
 
 		for (int i = 0; i < WaveIndex; i++)
 		{
@@ -46,6 +53,7 @@ public class WaveSpawner : MonoBehaviour {
 
 	void SpawnEnemy()
 	{
-		Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
+		Quaternion rot = Quaternion.Euler(spawnPoint.rotation.x, 0f, spawnPoint.rotation.z);
+		Instantiate(enemyPrefab, spawnPoint.position, rot);
 	}
 }

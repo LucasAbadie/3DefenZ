@@ -79,17 +79,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   standarTurret:
     prefab: {fileID: 1260192268838878, guid: d4c6b4eb87f0e9845a5584e13bd829c5, type: 2}
-    cost: 0
-    fireDamage: 0
+    cost: 150
   panelTurret:
     prefab: {fileID: 1654107699684858, guid: de7c1b07a1fa3f248863ad7c2789095f, type: 2}
-    cost: 0
-    fireDamage: 0
+    cost: 300
   missileTurret:
     prefab: {fileID: 1061953757188906, guid: ab0c143b8b80dc547b8d36d3c482c08f, type: 2}
-    cost: 0
-    fireDamage: 0
+    cost: 600
   laserBeamer:
     prefab: {fileID: 1728715491848886, guid: 20d90b1b0bdf2704b815421d65fe74eb, type: 2}
-    cost: 0
-    fireDamage: 0
+    cost: 1200

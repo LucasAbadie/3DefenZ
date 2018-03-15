@@ -382,12 +382,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  bulletPrefab: {fileID: 4370821107636166, guid: 368cfa9569b45b447b6cd165d116cc82,
-    type: 2}
+  bulletPrefab: {fileID: 0}
   isUseLaser: 1
   range: 15
   rotSpeed: 20
   fireRate: 1
+  fireDamage: 5
 --- !u!120 &120077064809600232
 LineRenderer:
   m_ObjectHideFlags: 1
