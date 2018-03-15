@@ -13,6 +13,29 @@ public class Node : MonoBehaviour {
 	private Renderer rend;
 	private Color defaultColor;
 
+	/**
+	* Accessors
+	*/
+	public GameObject Turret
+	{
+		get
+		{
+			return turret;
+		}
+
+		set
+		{
+			turret = value;
+		}
+	}
+
+	public Vector3 BuildPos
+	{
+		get
+		{
+			return transform.position + turretPosOffset;
+		}
+	}
 
 	/**
 	* Monobehavior methods
@@ -27,22 +50,7 @@ public class Node : MonoBehaviour {
 		if (EventSystem.current.IsPointerOverGameObject())
 			return;
 
-		if(BuildingManager.instance.TurretToBuild == null)
-		{
-			GameManager.instance.logsManager.Log_warn(gameObject.name + " Node class", "OnMouseDown", "turretToBuild into the BuildingManager is null");
-			return;
-		}
-
-		if(turret != null)
-		{
-			GameManager.instance.logsManager.Log_warn(gameObject.name + " Node class", "OnMouseDown", "turret in this node is not null");
-			return;
-		}
-
-		GameObject turretToBuild = BuildingManager.instance.TurretToBuild;
-		turret = Instantiate(turretToBuild, transform.position + turretPosOffset, transform.rotation);
-
-		BuildingManager.instance.TurretToBuild = null;
+		BuildingManager.instance.BuildTurretOnNode(this);
 	}
 
 	private void OnMouseEnter()
