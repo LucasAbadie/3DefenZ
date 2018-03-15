@@ -43,7 +43,7 @@ public class TurretBehavior : MonoBehaviour {
 	*/
 	// Use this for initialization
 	void Start () {
-		InvokeRepeating("UpdateTarget", 0, 0.5f);
+		InvokeRepeating("UpdateTarget", 0, 0.15f);
 
 		pivot = transform.GetChild(0);
 		firePoint = transform.GetChild(0).GetChild(0);
@@ -117,27 +117,30 @@ public class TurretBehavior : MonoBehaviour {
 
 	void UpdateTarget()
 	{
-		GameObject[] enemies = GameObject.FindGameObjectsWithTag(GameManager.instance.EnemyTag);
-
-		float shortestDistance = Mathf.Infinity;
-		GameObject nearestEnemy = null;
-
-		foreach(GameObject enemy in enemies)
+		if(target == null)
 		{
-			float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
+			GameObject[] enemies = GameObject.FindGameObjectsWithTag(GameManager.instance.EnemyTag);
 
-			if(distanceToEnemy < shortestDistance)
+			float shortestDistance = Mathf.Infinity;
+			GameObject nearestEnemy = null;
+
+			foreach (GameObject enemy in enemies)
 			{
-				shortestDistance = distanceToEnemy;
-				nearestEnemy = enemy;
-			}
-		}
+				float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
 
-		if(nearestEnemy != null && shortestDistance <= range)
-		{
-			target = nearestEnemy.transform;
-		}
-		else
+				if (distanceToEnemy < shortestDistance)
+				{
+					shortestDistance = distanceToEnemy;
+					nearestEnemy = enemy;
+				}
+			}
+
+			if (nearestEnemy != null && shortestDistance <= range)
+			{
+				target = nearestEnemy.transform;
+			}
+
+		} else if(target != null && Vector3.Distance(transform.position, target.position) > range)
 		{
 			target = null;
 		}

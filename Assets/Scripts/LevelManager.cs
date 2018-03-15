@@ -11,7 +11,8 @@ public class LevelManager : MonoBehaviour {
 	[Header("Attributes")]
 	[SerializeField] private int startCurrency = 0;
 	[SerializeField] private int startLives = 0;
-	[HideInInspector] public int rounds = 0;
+	[SerializeField] private int maxLevelForWin = 0;
+	private int rounds = 0;
 
 	[HideInInspector] public int stateGame;
 	public enum StateGame { Win, Lose, Pause, InGame };
@@ -31,6 +32,26 @@ public class LevelManager : MonoBehaviour {
 		get
 		{
 			return startLives;
+		}
+	}
+
+	public int Rounds
+	{
+		get
+		{
+			return rounds;
+		}
+
+		set
+		{
+			rounds = value;
+
+			if (rounds >= maxLevelForWin && stateGame != (int)StateGame.Win)
+			{
+				stateGame = (int)StateGame.Win;
+				UIManager.instance.DisplayPanelEndMenu();
+				return;
+			}
 		}
 	}
 
@@ -55,7 +76,7 @@ public class LevelManager : MonoBehaviour {
 		Time.timeScale = 1;
 
 		stateGame = (int)StateGame.InGame;
-		rounds = 0;
+		Rounds = 0;
 	}
 
 	/**
@@ -64,6 +85,13 @@ public class LevelManager : MonoBehaviour {
 	public static void RestartCurrentScene()
 	{
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+	}
+
+	public static void LoadNextLevel()
+	{
+		int index = (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings - 1)? 0 : SceneManager.GetActiveScene().buildIndex + 1;
+
+		SceneManager.LoadScene(index);
 	}
 
 	public static void BackToMenu()

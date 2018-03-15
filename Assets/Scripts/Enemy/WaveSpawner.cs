@@ -42,7 +42,7 @@ public class WaveSpawner : MonoBehaviour {
 
 	IEnumerator SpawnWave()
 	{
-		levelManager.rounds = waveIndex++;
+		levelManager.Rounds = waveIndex++;
 
 		for (int i = 0; i < WaveIndex; i++)
 		{

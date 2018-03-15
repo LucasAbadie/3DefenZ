@@ -25,10 +25,10 @@ public class PlayerStats : MonoBehaviour {
 
 		set
 		{
+			currency = value;
+
 			if (currency <= 0)
 				currency = 0;
-			else
-				currency = value;
 		}
 	}
 	public float Lives
@@ -42,7 +42,7 @@ public class PlayerStats : MonoBehaviour {
 		{
 			lives = value;
 
-			if (value <= 0 && levelManager.stateGame != (int)LevelManager.StateGame.Lose)
+			if (lives <= 0 && levelManager.stateGame != (int)LevelManager.StateGame.Lose)
 			{
 				levelManager.stateGame = (int)LevelManager.StateGame.Lose;
 				UIManager.instance.DisplayPanelEndMenu();

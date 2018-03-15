@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+using System.Collections;
+
 public class UIManager : MonoBehaviour {
 
 	/**
@@ -25,8 +27,13 @@ public class UIManager : MonoBehaviour {
 
 	[Header("GameOver")]
 	[SerializeField] private Text textGameOverRounds;
-	[SerializeField] private Button buttonRetry;
-	[SerializeField] private Button buttonBackToMenu;
+	[SerializeField] private Button buttonGameOverRetry;
+	[SerializeField] private Button buttonGameOverBackToMenu;
+
+	[Header("Win")]
+	[SerializeField] private Text textWinRounds;
+	[SerializeField] private Button buttonWinContinue;
+	[SerializeField] private Button buttonWinBackToMenu;
 	private Animator animEndMenu;
 
 	/**
@@ -56,8 +63,10 @@ public class UIManager : MonoBehaviour {
 		animEndMenu = panelEndMenu.GetComponent<Animator>();
 
 		//Set Listener on all buttons
-		buttonRetry.onClick.AddListener(delegate { LevelManager.RestartCurrentScene(); });
-		buttonBackToMenu.onClick.AddListener(delegate { LevelManager.BackToMenu(); });
+		buttonGameOverRetry.onClick.AddListener(delegate { LevelManager.RestartCurrentScene(); });
+		buttonGameOverBackToMenu.onClick.AddListener(delegate { LevelManager.BackToMenu(); });
+		buttonWinContinue.onClick.AddListener(delegate { LevelManager.LoadNextLevel(); });
+		buttonWinBackToMenu.onClick.AddListener(delegate { LevelManager.BackToMenu(); });
 
 		playerStats = PlayerStats.instance;
 		levelManager = LevelManager.instance;
@@ -86,15 +95,32 @@ public class UIManager : MonoBehaviour {
 		{
 			case (int)LevelManager.StateGame.Lose:
 				panelGameOver.SetActive(true);
-				textGameOverRounds.text = levelManager.rounds.ToString();
-
 				animEndMenu.SetBool("isLose", true);
+
+				textGameOverRounds.text = levelManager.Rounds.ToString();
 				break;
 			case (int)LevelManager.StateGame.Win:
 				panelWinMenu.SetActive(true);
-
 				animEndMenu.SetBool("isWin", true);
+
+				StartCoroutine(AnimateTextWinRounds());
 				break;
+		}
+	}
+
+	IEnumerator AnimateTextWinRounds()
+	{
+		textWinRounds.text = "0";
+		int rounds = 0;
+
+		yield return new WaitForSecondsRealtime(animEndMenu.GetCurrentAnimatorClipInfo(0).Length + 0.7f);
+
+		while (rounds < levelManager.Rounds)
+		{
+			rounds++;
+			textWinRounds.text = rounds.ToString();
+
+			yield return new WaitForSecondsRealtime(.03f);
 		}
 	}
 }

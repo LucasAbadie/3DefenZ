@@ -98,7 +98,7 @@ public class Enemy : MonoBehaviour {
 		PlayerStats.instance.Currency += dropCurrency;
 
 		GameObject effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
-		Destroy(effect, 5f);
+		Destroy(effect, 2.5f);
 		Destroy(transform.parent.gameObject);
 	}
 }
