@@ -152,7 +152,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1260192268838878}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5000001, z: 0}
+  m_LocalPosition: {x: 20.171154, y: 0.5, z: -4.9472528}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4649182536631854}
@@ -255,7 +255,6 @@ MonoBehaviour:
   target: {fileID: 0}
   bulletPrefab: {fileID: 4370821107636166, guid: 368cfa9569b45b447b6cd165d116cc82,
     type: 2}
-  isUseLaser: 0
   range: 20
   rotSpeed: 10
   fireRate: 5

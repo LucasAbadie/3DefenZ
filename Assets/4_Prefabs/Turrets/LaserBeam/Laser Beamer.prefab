@@ -162,7 +162,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1728715491848886}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20.12, y: 0.5, z: -5.6}
+  m_LocalPosition: {x: 20.234568, y: 0.5000001, z: -10.052696}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4922276424802780}
@@ -383,7 +383,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   bulletPrefab: {fileID: 0}
-  isUseLaser: 1
   range: 15
   rotSpeed: 20
   fireRate: 1
@@ -437,10 +436,10 @@ LineRenderer:
         tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
-      m_RotationOrder: 4
+      m_RotationOrder: 0
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.11963074, g: 0.09723631, b: 0.47794116, a: 1}
+      key0: {r: 1, g: 0.102941155, b: 0.102941155, a: 1}
       key1: {r: 0.1789504, g: 0.5454266, b: 0.78676474, a: 1}
       key2: {r: 1, g: 1, b: 0.22745098, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
