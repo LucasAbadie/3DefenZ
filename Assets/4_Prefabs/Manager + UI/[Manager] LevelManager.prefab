@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 114929919590202566}
   - component: {fileID: 114234341490347998}
   - component: {fileID: 114049261658372552}
-  - component: {fileID: 114087519764907660}
   m_Layer: 0
   m_Name: '[Manager] LevelManager'
   m_TagString: Untagged
@@ -54,29 +53,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a88e9c2bcf116a64291904f875869964, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114087519764907660
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1996207235671014}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4318ec9cb86696b4693581ae6e4cb91a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  standarTurret:
-    prefab: {fileID: 0}
-    cost: 0
-  panelTurret:
-    prefab: {fileID: 0}
-    cost: 0
-  missileTurret:
-    prefab: {fileID: 0}
-    cost: 0
-  laserBeamer:
-    prefab: {fileID: 0}
-    cost: 0
 --- !u!114 &114234341490347998
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -90,7 +66,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startCurrency: 400
   startLives: 1
-  maxLevelForWin: 1
+  maxLevelForWin: 15
   stateGame: 0
 --- !u!114 &114929919590202566
 MonoBehaviour:

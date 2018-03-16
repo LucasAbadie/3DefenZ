@@ -44,10 +44,10 @@ public class Shop : MonoBehaviour {
 
 	private void Purchase(TurretBlueprint turret)
 	{
-		if (playerStats.Currency >= turret.cost && buildManager.TurretToBuild == null)
+		if (playerStats.Currency >= turret.Cost && buildManager.TurretToBuild == null)
 		{
-			playerStats.Currency -= turret.cost;
-			buildManager.TurretToBuild = turret.prefab;
+			playerStats.Currency -= turret.Cost;
+			buildManager.TurretToBuild = turret;
 		}
 		else
 		{

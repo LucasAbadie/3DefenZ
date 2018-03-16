@@ -29,14 +29,48 @@ public class TurretBehavior : MonoBehaviour {
 	/**
 	* Accessors
 	*/
+	public float Range
+	{
+		get
+		{
+			return range;
+		}
+
+		private set
+		{
+			range = value;
+
+			if (range >= 40)
+				range = 40;
+		}
+	}
 	public float FireDamage
 	{
 		get
 		{
 			return fireDamage;
 		}
-	}
 
+		private set
+		{
+			fireDamage = value;
+		}
+	}
+	public float FireRate
+	{
+		get
+		{
+			return fireRate;
+		}
+
+		private set
+		{
+			fireRate = value;
+
+			if (fireRate >= 5)
+				fireRate = 5;
+		}
+	}
 
 	/**
 	* Monobehavior methods
@@ -144,6 +178,13 @@ public class TurretBehavior : MonoBehaviour {
 		{
 			target = null;
 		}
+	}
+
+	public void UpdateSelf()
+	{
+		Range += 2.5f;
+		FireDamage += 5;
+		FireRate += 0.25f;
 	}
 
 	void Shoot()
