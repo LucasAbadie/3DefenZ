@@ -9,16 +9,20 @@ public class BuildingManager : MonoBehaviour {
 	*/
 	[HideInInspector] public static BuildingManager instance = null;
 
-	[Header("Unity Setup fields")]
-	[SerializeField] private NodeUI nodeUI;
+	private PlayerStats playerStats;
 
-	private GameObject turretToBuild;
+	[Header("Unity Setup fields")]
+	[SerializeField] private GameObject buildEffect;
+	[SerializeField] private GameObject nodeUIPrefab;
+
+	private TurretBlueprint turretToBuild;
 	private Node selectedNode;
+	private NodeUI nodeUI;
 
 	/**
 	* Accessors
 	*/
-	public GameObject TurretToBuild
+	public TurretBlueprint TurretToBuild
 	{
 		get
 		{
@@ -29,6 +33,14 @@ public class BuildingManager : MonoBehaviour {
 		{
 			turretToBuild = value;
 			DeselectNode();
+		}
+	}
+
+	public GameObject BuildEffect
+	{
+		get
+		{
+			return buildEffect;
 		}
 	}
 
@@ -48,12 +60,21 @@ public class BuildingManager : MonoBehaviour {
 		instance = this;
 	}
 
+	private void Start()
+	{
+		playerStats = PlayerStats.instance;
+
+		// Create NodeUI into the scene and get it
+		GameObject nodeUIClone = Instantiate(nodeUIPrefab);
+		nodeUI = nodeUIClone.GetComponent<NodeUI>();
+	}
+
 	/**
 	* Personal methods
 	*/
 	public void BuildTurretOnNode(Node node)
 	{
-		if (node.Turret != null)
+		if (node.Turret.gameObject != null)
 		{
 			GameManager.instance.logsManager.Log_warn("BuildingManager", "BuildTurretOnNode", "turret in " + node.gameObject.name + " is not null");
 
@@ -68,10 +89,41 @@ public class BuildingManager : MonoBehaviour {
 			return;
 		}
 
-		GameObject turretToBuild = instance.TurretToBuild;
-		node.Turret = Instantiate(turretToBuild, node.BuildPos, node.transform.rotation);
+		node.Turret = new TurretBlueprint(instance.TurretToBuild);
+
+		GameObject turretBuild = instance.TurretToBuild.prefab;
+		turretBuild = Instantiate(turretBuild, node.BuildPos, node.transform.rotation);
+
+		node.Turret.gameObject = turretBuild;
+		node.Turret.stats_Behavior = node.Turret.gameObject.GetComponent<TurretBehavior>();
+
+		GameObject effect = instance.BuildEffect;
+		effect = Instantiate(effect, node.Turret.gameObject.transform);
+		Destroy(effect, 1f);
 
 		instance.TurretToBuild = null;
+	}
+
+	public void UpgradeTurret(Node node)
+	{
+		if (playerStats.Currency < node.Turret.UpgradeCost || !node.Turret.CanUpgrade)
+		{
+			GameManager.instance.logsManager.Log_info("BuildingManager", "UpgradeTurret", node.Turret.prefab.gameObject.name + "doesn't upgrade (cost is upper than currency or Max upgrade)");
+			return;
+		}
+
+		GameObject effect = instance.BuildEffect;
+		effect = Instantiate(effect, node.Turret.gameObject.transform);
+		Destroy(effect, 1f);
+
+		playerStats.Currency -= node.Turret.UpgradeCost;
+		node.Turret.AllUpdate();
+		node.Turret.stats_Behavior.UpdateSelf();
+	}
+
+	public void SellTurret(Node node)
+	{
+
 	}
 
 	private void SelectedNode (Node node)

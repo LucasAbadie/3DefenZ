@@ -7,7 +7,12 @@ public class NodeUI : MonoBehaviour {
 	* Attributes
 	*/
 	private Node target;
-	private GameObject ui;
+
+	[SerializeField] private GameObject ui;
+	[SerializeField] private Button buttonUpgrade;
+	[SerializeField] private Text buttonUpgradeText;
+	[SerializeField] private Button buttonSell;
+	[SerializeField] private Text buttonSellText;
 
 	/**
 	* Accessors
@@ -18,8 +23,14 @@ public class NodeUI : MonoBehaviour {
 	*/
 	private void Start()
 	{
-		ui = transform.GetChild(0).gameObject;
 		ui.SetActive(false);
+
+		// Set Button Listeners
+		buttonUpgrade.onClick.AddListener(
+			delegate {
+				BuildingManager.instance.UpgradeTurret(target);
+				SetTarget(target);
+			});
 	}
 
 	/**
@@ -40,6 +51,16 @@ public class NodeUI : MonoBehaviour {
 
 		target = node;
 		transform.position = target.BuildPos;
+
+		string upgradeText = "";
+
+		if (target.Turret.CanUpgrade)
+			upgradeText = "$" + target.Turret.UpgradeCost;
+		else
+			upgradeText = "MAX";
+
+		buttonUpgradeText.text = upgradeText;
+		buttonSellText.text = "$" + target.Turret.SellCost; ;
 	}
 
 

@@ -9,14 +9,14 @@ public class Node : MonoBehaviour {
 	[SerializeField] private Color hoverColor;
 	[SerializeField] private Vector3 turretPosOffset;
 
-	private GameObject turret;
+	private TurretBlueprint turret;
 	private Renderer rend;
 	private Color defaultColor;
 
 	/**
 	* Accessors
 	*/
-	public GameObject Turret
+	public TurretBlueprint Turret
 	{
 		get
 		{
@@ -41,6 +41,8 @@ public class Node : MonoBehaviour {
 	* Monobehavior methods
 	*/
 	void Start () {
+		Turret = new TurretBlueprint();
+
 		rend = GetComponent<Renderer>();
 		defaultColor = rend.material.color;
 	}
