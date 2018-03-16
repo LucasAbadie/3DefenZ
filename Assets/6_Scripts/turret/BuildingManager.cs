@@ -13,6 +13,8 @@ public class BuildingManager : MonoBehaviour {
 
 	[Header("Unity Setup fields")]
 	[SerializeField] private GameObject buildEffect;
+	[SerializeField] private GameObject upgradeEffect;
+	[SerializeField] private GameObject sellEffect;
 	[SerializeField] private GameObject nodeUIPrefab;
 
 	private TurretBlueprint turretToBuild;
@@ -35,12 +37,25 @@ public class BuildingManager : MonoBehaviour {
 			DeselectNode();
 		}
 	}
-
 	public GameObject BuildEffect
 	{
 		get
 		{
 			return buildEffect;
+		}
+	}
+	public GameObject UpgradeEffect
+	{
+		get
+		{
+			return upgradeEffect;
+		}
+	}
+	public GameObject SellEffect
+	{
+		get
+		{
+			return sellEffect;
 		}
 	}
 
@@ -112,7 +127,7 @@ public class BuildingManager : MonoBehaviour {
 			return;
 		}
 
-		GameObject effect = instance.BuildEffect;
+		GameObject effect = instance.UpgradeEffect;
 		effect = Instantiate(effect, node.Turret.gameObject.transform);
 		Destroy(effect, 1f);
 
@@ -123,7 +138,14 @@ public class BuildingManager : MonoBehaviour {
 
 	public void SellTurret(Node node)
 	{
+		playerStats.Currency += node.Turret.SellCost;
 
+		GameObject effect = instance.SellEffect;
+		effect = Instantiate(effect, node.Turret.gameObject.transform.position, Quaternion.identity);
+		Destroy(effect, 1f);
+
+		Destroy(node.Turret.gameObject);
+		node.Turret = new TurretBlueprint();
 	}
 
 	private void SelectedNode (Node node)

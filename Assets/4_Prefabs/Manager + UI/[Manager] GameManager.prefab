@@ -55,6 +55,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildEffect: {fileID: 1540094505077966, guid: eb4cca2c14c726442968e6633fa35fa2,
     type: 2}
+  upgradeEffect: {fileID: 1379683505817082, guid: c99835e8768b7bf438e05948a858583e,
+    type: 2}
+  sellEffect: {fileID: 1389033844455010, guid: e60d05c379069a8419e424ecba0213ff, type: 2}
   nodeUIPrefab: {fileID: 1168595637665056, guid: e6ad87606a7742c4a8bc4de13fae24fa,
     type: 2}
 --- !u!114 &114134056687046132

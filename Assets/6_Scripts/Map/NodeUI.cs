@@ -31,6 +31,11 @@ public class NodeUI : MonoBehaviour {
 				BuildingManager.instance.UpgradeTurret(target);
 				SetTarget(target);
 			});
+		buttonSell.onClick.AddListener(
+			delegate {
+				BuildingManager.instance.SellTurret(target);
+				SetTarget();
+			});
 	}
 
 	/**
