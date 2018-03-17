@@ -11,7 +11,7 @@ public class LevelManager : MonoBehaviour {
 	[Header("Attributes")]
 	[SerializeField] private int startCurrency = 0;
 	[SerializeField] private int startLives = 0;
-	[SerializeField] private int maxLevelForWin = 0;
+	[SerializeField] private int maxWaveForWin = 0;
 	private int rounds = 0;
 
 	[HideInInspector] public int stateGame;
@@ -46,7 +46,7 @@ public class LevelManager : MonoBehaviour {
 		{
 			rounds = value;
 
-			if (rounds >= maxLevelForWin && stateGame != (int)StateGame.Win)
+			if (rounds >= maxWaveForWin && stateGame != (int)StateGame.Win)
 			{
 				stateGame = (int)StateGame.Win;
 				UIManager.instance.DisplayPanelEndMenu();
@@ -78,6 +78,8 @@ public class LevelManager : MonoBehaviour {
 		stateGame = (int)StateGame.InGame;
 		Rounds = 0;
 	}
+
+	
 
 	/**
 	* Personal methods

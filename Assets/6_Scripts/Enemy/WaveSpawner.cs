@@ -14,9 +14,9 @@ public class WaveSpawner : MonoBehaviour {
 	public float timeBetweensWaves = 5f;
 	public float countdown = 2f;
 
-	[SerializeField] private static int waveIndex = 0;
+	[SerializeField] private int waveIndex = 0;
 
-	public static int WaveIndex
+	public int WaveIndex
 	{
 		get
 		{
@@ -27,6 +27,7 @@ public class WaveSpawner : MonoBehaviour {
 	private void Start()
 	{
 		levelManager = LevelManager.instance;
+		waveIndex = 0;
 	}
 
 	private void Update()
