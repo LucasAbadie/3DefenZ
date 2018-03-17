@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerStats : MonoBehaviour {
 
@@ -73,5 +71,7 @@ public class PlayerStats : MonoBehaviour {
 
 		currency = levelManager.StartCurrency;
 		Lives = levelManager.StartLives;
+
+		print(Currency);
 	}
 }

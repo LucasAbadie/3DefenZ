@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Shop : MonoBehaviour {
 
+	/**
+	* Attributes
+	*/
+	[HideInInspector] public static Shop instance = null;
+
 	BuildingManager buildManager;
 	LevelManager levelManager;
 	PlayerStats playerStats;
@@ -13,6 +18,22 @@ public class Shop : MonoBehaviour {
 	public TurretBlueprint missileTurret;
 	public TurretBlueprint laserBeamer;
 
+	/**
+	* Monobehavior methods
+	*/
+	void Awake()
+	{
+
+		// Check if there is another gamemanager if it is, I self-destruct
+		if (instance != null && instance != this)
+		{
+			Destroy(this.gameObject);
+			return;
+		}
+
+		instance = this;
+	}
+
 	private void Start()
 	{
 		buildManager = BuildingManager.instance;
@@ -21,7 +42,9 @@ public class Shop : MonoBehaviour {
 		playerStats = PlayerStats.instance;
 	}
 
-
+	/**
+	* Personal methods
+	*/
 	public void PurchaseStandarTurret()
 	{
 		Purchase(standarTurret);

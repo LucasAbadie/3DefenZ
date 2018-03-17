@@ -23,8 +23,6 @@ public class NodeUI : MonoBehaviour {
 	*/
 	private void Start()
 	{
-		ui.SetActive(false);
-
 		// Set Button Listeners
 		buttonUpgrade.onClick.AddListener(
 			delegate {

@@ -34,7 +34,8 @@ public class BuildingManager : MonoBehaviour {
 		set
 		{
 			turretToBuild = value;
-			DeselectNode();
+			if(nodeUI != null)
+				DeselectNode();
 		}
 	}
 	public GameObject BuildEffect
@@ -78,10 +79,6 @@ public class BuildingManager : MonoBehaviour {
 	private void Start()
 	{
 		playerStats = PlayerStats.instance;
-
-		// Create NodeUI into the scene and get it
-		GameObject nodeUIClone = Instantiate(nodeUIPrefab);
-		nodeUI = nodeUIClone.GetComponent<NodeUI>();
 	}
 
 	/**
@@ -92,6 +89,13 @@ public class BuildingManager : MonoBehaviour {
 		if (node.Turret.gameObject != null)
 		{
 			GameManager.instance.logsManager.Log_warn("BuildingManager", "BuildTurretOnNode", "turret in " + node.gameObject.name + " is not null");
+
+			if(nodeUI == null)
+			{
+				// Create NodeUI into the scene and get it
+				GameObject nodeUIClone = Instantiate(nodeUIPrefab);
+				nodeUI = nodeUIClone.GetComponent<NodeUI>();
+			}
 
 			SelectedNode(node);
 
