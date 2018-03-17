@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 69170e97248edb3458b9c478754bf6e6
+timeCreated: 1521124492
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Earth Orbiter Laser
+  fontNames:
+  - Earth Orbiter Laser
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
