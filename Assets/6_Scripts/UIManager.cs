@@ -21,6 +21,8 @@ public class UIManager : MonoBehaviour {
 	[Header("Main")]
 	[SerializeField] private Text textLives;
 	[SerializeField] private Text textCurrency;
+	[SerializeField] private GameObject ContentShop;
+	private Button[] buttonsShop;
 
 	[Header("Info")]
 	[SerializeField] private GameObject panelInfo;
@@ -63,6 +65,18 @@ public class UIManager : MonoBehaviour {
 		animEndMenu = panelEndMenu.GetComponent<Animator>();
 
 		//Set Listener on all buttons
+		buttonsShop = new Button[ContentShop.transform.childCount];
+
+		for(int i = 0; i < buttonsShop.Length; i++)
+		{
+			buttonsShop[i] = ContentShop.transform.GetChild(i).GetComponent<Button>();
+		}
+
+		buttonsShop[0].onClick.AddListener(delegate { Shop.instance.PurchaseStandarTurret(); });
+		buttonsShop[1].onClick.AddListener(delegate { Shop.instance.PurchasePanelTurret(); });
+		buttonsShop[2].onClick.AddListener(delegate { Shop.instance.PurchaseMissileTurret(); });
+		buttonsShop[3].onClick.AddListener(delegate { Shop.instance.PurchaseLaserBeamer(); });
+
 		buttonGameOverRetry.onClick.AddListener(delegate { LevelManager.RestartCurrentScene(); });
 		buttonGameOverBackToMenu.onClick.AddListener(delegate { LevelManager.BackToMenu(); });
 		buttonWinContinue.onClick.AddListener(delegate { LevelManager.LoadNextLevel(); });

@@ -15,11 +15,22 @@ public class CameraBehavior : MonoBehaviour {
 	[SerializeField] private float zoomMinY = 10f;
 	[SerializeField] private float zoomMaxY = 80f;
 
+	private Vector3 startPos;
+
 	private bool doMove = true;
+
+	/**
+	* Accessors
+	*/
 
 	/**
 	* Monobehavior methods
 	*/
+	private void Start()
+	{
+		startPos = Camera.main.transform.position;
+	}
+
 	void Update () {
 
 		if (Input.GetKeyDown(KeyCode.Space))
@@ -28,22 +39,22 @@ public class CameraBehavior : MonoBehaviour {
 		if (!doMove)
 			return;
 
-		if(Input.GetKey(KeyCode.Z) || Input.mousePosition.y >= Screen.height - screenBorderThickness)
+		if(Camera.main.transform.position.z <= startPos.z + (Camera.main.fieldOfView / 6 + (startPos.y - Camera.main.transform.position.y)) && (Input.GetKey(KeyCode.Z) || Input.mousePosition.y >= Screen.height - screenBorderThickness))
 		{
 			transform.Translate(Vector3.forward * scrollSpeed * Time.deltaTime, Space.World);
 		}
 
-		if (Input.GetKey(KeyCode.S) || Input.mousePosition.y <= screenBorderThickness)
+		if (Camera.main.transform.position.z >= startPos.z - (Camera.main.fieldOfView / 6 + (startPos.y - Camera.main.transform.position.y)) && (Input.GetKey(KeyCode.S) || Input.mousePosition.y <= screenBorderThickness))
 		{
 			transform.Translate(Vector3.back * scrollSpeed * Time.deltaTime, Space.World);
 		}
 
-		if (Input.GetKey(KeyCode.D) || Input.mousePosition.x >= Screen.width - screenBorderThickness)
+		if (Camera.main.transform.position.x <= startPos.x + (Camera.main.fieldOfView / 6 + (startPos.y - Camera.main.transform.position.y)) && (Input.GetKey(KeyCode.D) || Input.mousePosition.x >= Screen.width - screenBorderThickness))
 		{
 			transform.Translate(Vector3.right * scrollSpeed * Time.deltaTime, Space.World);
 		}
 
-		if (Input.GetKey(KeyCode.Q) || Input.mousePosition.x <= screenBorderThickness)
+		if (Camera.main.transform.position.x >= startPos.x - (Camera.main.fieldOfView / 6 + (startPos.y - Camera.main.transform.position.y)) && (Input.GetKey(KeyCode.Q) || Input.mousePosition.x <= screenBorderThickness))
 		{
 			transform.Translate(Vector3.left * scrollSpeed * Time.deltaTime, Space.World);
 		}
