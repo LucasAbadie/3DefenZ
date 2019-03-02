@@ -8,7 +8,7 @@ public class TurretBehavior : MonoBehaviour {
 	* Attributes
 	*/
 	[Header("Unity Setup fields")]
-	[SerializeField] private Transform target;
+	[SerializeField] private Enemy target;
 	private Transform pivot;
 	[SerializeField] private Transform bulletPrefab;
 	private Transform firePoint;
@@ -87,7 +87,7 @@ public class TurretBehavior : MonoBehaviour {
 			isUseLaser = true;
 
 			lineRenderer = transform.GetComponent<LineRenderer>();
-			impactEffect = transform.GetChild(transform.childCount - 1).GetComponent<ParticleSystem>();
+			impactEffect = transform.GetChild(2).GetComponent<ParticleSystem>();
 			impactLight = impactEffect.transform.GetChild(0).GetChild(0).GetComponent<Light>();
 		}
 	}
@@ -142,7 +142,7 @@ public class TurretBehavior : MonoBehaviour {
 	*/
 	void LockOnTarget()
 	{
-		Vector3 dir = target.position - transform.position;
+		Vector3 dir = target.transform.position - transform.position;
 		Quaternion lookRotation = Quaternion.LookRotation(dir);
 		Vector3 rotation = Quaternion.Lerp(pivot.rotation, lookRotation, Time.deltaTime * rotSpeed).eulerAngles;
 
@@ -171,11 +171,21 @@ public class TurretBehavior : MonoBehaviour {
 
 			if (nearestEnemy != null && shortestDistance <= range)
 			{
-				target = nearestEnemy.transform;
+				target = nearestEnemy.GetComponent<Enemy>();
+
+				if (isUseLaser)
+				{
+					target.CurrentSpeed *= 0.5f;
+				}
 			}
 
-		} else if(target != null && Vector3.Distance(transform.position, target.position) > range)
+		} else if(target != null && Vector3.Distance(transform.position, target.transform.position) > range)
 		{
+			if (isUseLaser)
+			{
+				target.CurrentSpeed = target.InitSpeed;
+			}
+
 			target = null;
 		}
 	}
@@ -208,11 +218,13 @@ public class TurretBehavior : MonoBehaviour {
 		}
 
 		lineRenderer.SetPosition(0, firePoint.position);
-		lineRenderer.SetPosition(1, target.position);
+		lineRenderer.SetPosition(1, target.transform.position);
 
 		// Set pos & rot impacte effect particle
-		Vector3 dir = firePoint.position - target.position;
-		impactEffect.transform.position = target.position + dir.normalized;
+		Vector3 dir = firePoint.position - target.transform.position;
+		impactEffect.transform.position = target.transform.position + dir.normalized;
 		impactEffect.transform.rotation = Quaternion.LookRotation(dir);
+
+		target.Health = (target.Health - fireRate);
 	}
 }

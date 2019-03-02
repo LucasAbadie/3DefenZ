@@ -14,7 +14,8 @@ public class Enemy : MonoBehaviour {
 	private float health = 0;
 	private Image healthBar;
 
-	[Range(0, 30)] public float speed = 10f;
+	[SerializeField] [Range(0, 30)] private float initSpeed = 10f;
+	private float currentSpeed = 0;
 
 	[SerializeField] private int dropCurrency = 0;
 
@@ -47,6 +48,27 @@ public class Enemy : MonoBehaviour {
 		}
 	}
 
+	public float InitSpeed
+	{
+		get
+		{
+			return initSpeed;
+		}
+	}
+
+	public float CurrentSpeed
+	{
+		get
+		{
+			return currentSpeed;
+		}
+
+		set
+		{
+			currentSpeed = value;
+		}
+	}
+
 	/**
 	* Monobehavior methods
 	*/
@@ -57,12 +79,13 @@ public class Enemy : MonoBehaviour {
 		target = WayPoints.points[0];
 		healthBar = transform.parent.GetChild(0).GetChild(0).GetChild(0).GetComponent<Image>();
 		Health = healthMax;
+		currentSpeed = initSpeed;
 	}
 
 	private void Update()
 	{
 		Vector3 dir = target.position - transform.position;
-		transform.parent.Translate(dir.normalized * speed * Time.deltaTime, Space.World);
+		transform.parent.Translate(dir.normalized * currentSpeed * Time.deltaTime, Space.World);
 		transform.LookAt(target);
 
 		if (Vector3.Distance(transform.position, target.position) <= 0.2)
