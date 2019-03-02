@@ -67,7 +67,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startCurrency: 400
   startLives: 1
-  maxWaveForWin: 2
+  maxWaveForWin: 15
   stateGame: 0
 --- !u!114 &114308664191146260
 MonoBehaviour:

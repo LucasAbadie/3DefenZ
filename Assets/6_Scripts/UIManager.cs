@@ -17,6 +17,7 @@ public class UIManager : MonoBehaviour {
 	[SerializeField] private GameObject panelEndMenu;
 	[SerializeField] private GameObject panelGameOver;
 	[SerializeField] private GameObject panelWinMenu;
+	[SerializeField] private GameObject panelPause;
 
 	[Header("Main")]
 	[SerializeField] private Text textLives;
@@ -26,6 +27,11 @@ public class UIManager : MonoBehaviour {
 
 	[Header("Info")]
 	[SerializeField] private GameObject panelInfo;
+
+	[Header("Pause")]
+	[SerializeField] private Button buttonPauseContinue;
+	[SerializeField] private Button buttonPauseRetry;
+	[SerializeField] private Button buttonPauseBackToMenu;
 
 	[Header("GameOver")]
 	[SerializeField] private Text textGameOverRounds;
@@ -57,6 +63,7 @@ public class UIManager : MonoBehaviour {
 	private void Start()
 	{
 		panelInfo.SetActive(false);
+		panelPause.SetActive(false);
 		panelEndMenu.SetActive(false);
 		panelGameOver.SetActive(false);
 		panelWinMenu.SetActive(false);
@@ -77,6 +84,10 @@ public class UIManager : MonoBehaviour {
 		buttonsShop[2].onClick.AddListener(delegate { Shop.instance.PurchaseMissileTurret(); });
 		buttonsShop[3].onClick.AddListener(delegate { Shop.instance.PurchaseLaserBeamer(); });
 
+		buttonPauseContinue.onClick.AddListener(delegate { DisplayPanelPause(); });
+		buttonPauseRetry.onClick.AddListener(delegate { LevelManager.RestartCurrentScene(); });
+		buttonPauseBackToMenu.onClick.AddListener(delegate { LevelManager.BackToMenu(); });
+
 		buttonGameOverRetry.onClick.AddListener(delegate { LevelManager.RestartCurrentScene(); });
 		buttonGameOverBackToMenu.onClick.AddListener(delegate { LevelManager.BackToMenu(); });
 		buttonWinContinue.onClick.AddListener(delegate { LevelManager.LoadNextLevel(); });
@@ -87,6 +98,9 @@ public class UIManager : MonoBehaviour {
 	}
 
 	void Update () {
+		if (Input.GetButtonDown("Cancel"))
+			DisplayPanelPause();
+
 		textLives.text = playerStats.Lives + " LIVES";
 		textCurrency.text = playerStats.Currency + " $";
 	}
@@ -98,6 +112,17 @@ public class UIManager : MonoBehaviour {
 	{
 		Time.timeScale = (Time.timeScale != 0) ? 0 : 1;
 		panelInfo.SetActive(!panelInfo.activeSelf);
+	}
+
+	public void DisplayPanelPause()
+	{
+		Time.timeScale = (Time.timeScale != 0) ? 0 : 1;
+		panelPause.SetActive(!panelPause.activeSelf);
+
+		if(panelPause.activeSelf)
+			levelManager.stateGame = (int)LevelManager.StateGame.Pause;
+		else
+			levelManager.stateGame = (int)LevelManager.StateGame.InGame;
 	}
 
 	public void DisplayPanelEndMenu()
