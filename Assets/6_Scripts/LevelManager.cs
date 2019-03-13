@@ -1,18 +1,19 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
+[RequireComponent(typeof(Enemy.WaveSpawner))]
 public class LevelManager : MonoBehaviour {
 
 	/**
 	* Attributes
 	*/
 	[HideInInspector] public static LevelManager instance = null;
+	private Enemy.WaveSpawner waveSpawner;
 
 	[Header("Attributes")]
 	[SerializeField] private int startCurrency = 0;
 	[SerializeField] private int startLives = 0;
-	[SerializeField] private int maxWaveForWin = 0;
-	private int rounds = 0;
+	private int currentRoundsIndex = 0;
 
 	[HideInInspector] public int stateGame;
 	public enum StateGame { Win, Lose, Pause, InGame };
@@ -35,23 +36,24 @@ public class LevelManager : MonoBehaviour {
 		}
 	}
 
-	public int Rounds
+	public int CurrentRoundsIndex
 	{
 		get
 		{
-			return rounds;
+			return currentRoundsIndex;
 		}
 
 		set
 		{
-			rounds = value;
+			currentRoundsIndex = value;
+		}
+	}
 
-			if (rounds >= maxWaveForWin && stateGame != (int)StateGame.Win)
-			{
-				stateGame = (int)StateGame.Win;
-				UIManager.instance.DisplayPanelEndMenu();
-				return;
-			}
+	public Enemy.WaveSpawner WaveSpawner
+	{
+		get
+		{
+			return waveSpawner;
 		}
 	}
 
@@ -76,10 +78,29 @@ public class LevelManager : MonoBehaviour {
 		Time.timeScale = 1;
 
 		stateGame = (int)StateGame.InGame;
-		Rounds = 0;
+		waveSpawner = GetComponent<Enemy.WaveSpawner>();
 	}
 
-	
+	private void Update()
+	{
+		if(currentRoundsIndex > 0)
+		{
+			print(currentRoundsIndex >= waveSpawner.dataRW.Rounds.Length);
+			print(waveSpawner.WaveIndex >= waveSpawner.dataRW.Rounds[currentRoundsIndex - 1].Waves.Length);
+			print(!waveSpawner.isRoundPlaying);
+			print("---------------------------");
+
+			if (currentRoundsIndex >= waveSpawner.dataRW.Rounds.Length
+				&& waveSpawner.WaveIndex >= waveSpawner.dataRW.Rounds[currentRoundsIndex - 1].Waves.Length
+				&& !waveSpawner.isRoundPlaying
+				&& stateGame != (int)StateGame.Win)
+			{
+				stateGame = (int)StateGame.Win;
+				UIManager.instance.DisplayPanelEndMenu();
+				return;
+			}
+		}
+	}
 
 	/**
 	* Personal methods

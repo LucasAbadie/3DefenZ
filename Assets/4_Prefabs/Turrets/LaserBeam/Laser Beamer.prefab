@@ -386,7 +386,7 @@ MonoBehaviour:
   range: 15
   rotSpeed: 20
   fireRate: 1
-  fireDamage: 20
+  fireDamage: 100
 --- !u!120 &120077064809600232
 LineRenderer:
   m_ObjectHideFlags: 1

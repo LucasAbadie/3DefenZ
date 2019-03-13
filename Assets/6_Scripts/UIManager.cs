@@ -21,6 +21,8 @@ public class UIManager : MonoBehaviour {
 
 	[Header("Main")]
 	[SerializeField] private Text textLives;
+	[SerializeField] private Text textRoundIndex;
+	[SerializeField] private Text textRoundTimer;
 	[SerializeField] private Text textCurrency;
 	[SerializeField] private GameObject ContentShop;
 	private Button[] buttonsShop;
@@ -103,6 +105,8 @@ public class UIManager : MonoBehaviour {
 
 		textLives.text = playerStats.Lives + " LIVES";
 		textCurrency.text = playerStats.Currency + " $";
+		textRoundIndex.text = "Round-" + levelManager.CurrentRoundsIndex;
+		textRoundTimer.text = Tools.GlobalTools.FloatToTime(levelManager.WaveSpawner.Countdown, "00.00");
 	}
 
 	/**
@@ -136,7 +140,7 @@ public class UIManager : MonoBehaviour {
 				panelGameOver.SetActive(true);
 				animEndMenu.SetBool("isLose", true);
 
-				textGameOverRounds.text = levelManager.Rounds.ToString();
+				textGameOverRounds.text = levelManager.CurrentRoundsIndex.ToString();
 				break;
 			case (int)LevelManager.StateGame.Win:
 				panelWinMenu.SetActive(true);
@@ -154,7 +158,7 @@ public class UIManager : MonoBehaviour {
 
 		yield return new WaitForSecondsRealtime(animEndMenu.GetCurrentAnimatorClipInfo(0).Length + 0.7f);
 
-		while (rounds < levelManager.Rounds)
+		while (rounds < levelManager.CurrentRoundsIndex)
 		{
 			rounds++;
 			textWinRounds.text = rounds.ToString();

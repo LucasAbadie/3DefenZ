@@ -258,4 +258,4 @@ MonoBehaviour:
   range: 20
   rotSpeed: 10
   fireRate: 5
-  fireDamage: 20
+  fireDamage: 125

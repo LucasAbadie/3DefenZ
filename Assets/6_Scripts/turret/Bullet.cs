@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour {
 
-	private Enemy target;
+	private Enemy.EnemyBase target;
 	[SerializeField] private float speed = 70f;
 	[SerializeField, Range(0, 50)] private float explosionRadius = 0f;
 	[SerializeField] private GameObject impactEffect;
 
 	public void Seek(GameObject _target)
 	{
-		this.target = _target.GetComponent<Enemy>();
+		this.target = _target.GetComponent<Enemy.EnemyBase>();
 	}
 
 	// Update is called once per frame
@@ -66,7 +66,7 @@ public class Bullet : MonoBehaviour {
 
 	private void Damage(Transform targetEnemy)
 	{
-		targetEnemy.GetComponent<Enemy>().Health -= transform.parent.GetComponent<TurretBehavior>().FireDamage;
+		targetEnemy.GetComponent<Enemy.EnemyBase>().Health -= transform.parent.GetComponent<TurretBehavior>().FireDamage;
 	}
 
 	private void OnDrawGizmosSelected()

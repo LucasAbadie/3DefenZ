@@ -8,7 +8,7 @@ public class TurretBehavior : MonoBehaviour {
 	* Attributes
 	*/
 	[Header("Unity Setup fields")]
-	[SerializeField] private Enemy target;
+	[SerializeField] private Enemy.EnemyBase target;
 	private Transform pivot;
 	[SerializeField] private Transform bulletPrefab;
 	private Transform firePoint;
@@ -171,7 +171,7 @@ public class TurretBehavior : MonoBehaviour {
 
 			if (nearestEnemy != null && shortestDistance <= range)
 			{
-				target = nearestEnemy.GetComponent<Enemy>();
+				target = nearestEnemy.GetComponent<Enemy.EnemyBase>();
 
 				if (isUseLaser)
 				{
